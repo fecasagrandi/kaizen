@@ -1,0 +1,46 @@
+.legalContent {
+  color: #e0e0e0;
+  font-size: 0.9rem;
+}
+
+.legalContent h3 {
+  color: #3291ff;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  font-size: 1.1rem;
+}
+
+.legalContent h3:first-child {
+  margin-top: 0;
+}
+
+.legalContent p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.legalContent ul {
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.legalContent li {
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+.legalContent strong {
+  color: #e0e0e0;
+  font-weight: 600;
+}
+
+.legalLink {
+  color: #3291ff;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline;
+}
+
+.legalLink:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,110 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: var(--background-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.logoText {
+  color: var(--primary-color);
+  cursor: pointer;
+}
+
+.nav {
+  flex: 1;
+  margin: 0 2rem;
+}
+
+.navList {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  justify-content: center;
+}
+
+.navItem {
+  margin: 0 1rem;
+}
+
+.navItem span {
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.navItem span:hover {
+  background-color: rgba(0, 112, 243, 0.1);
+  color: var(--primary-color);
+}
+
+.auth {
+  display: flex;
+  gap: 1rem;
+}
+
+.loginButton, .registerButton {
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.loginButton {
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+
+.loginButton:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.registerButton {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.registerButton:hover {
+  background-color: transparent;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    padding: 1rem;
+  }
+  
+  .nav {
+    margin: 1rem 0;
+    width: 100%;
+  }
+  
+  .navList {
+    flex-wrap: wrap;
+  }
+  
+  .navItem {
+    margin: 0.5rem;
+  }
+  
+  .auth {
+    width: 100%;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+}
