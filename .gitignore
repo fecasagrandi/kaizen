@@ -8,7 +8,6 @@ node_modules/
 /frontend/out/
 /backend/dist/
 /backend/build/
-/frontend/kaizen.tar.gz
 
 # Variáveis de ambiente
 .env
