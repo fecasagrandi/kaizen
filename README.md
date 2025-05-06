@@ -1,5 +1,7 @@
 # Kaizen - Plataforma de Gestão de Hábitos e Produtividade
 
+![image](https://github.com/user-attachments/assets/612372de-e8e7-4062-8200-fe8da4b4aa89)
+
 Kaizen é uma plataforma web para gestão de hábitos e tarefas que combina gamificação e inteligência artificial para maximizar a motivação e a produtividade dos usuários.
 
 ## Visão Geral
