@@ -1,11 +1,27 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import Typed from 'typed.js';
 import styles from '@/styles/Home.module.css';
 
 const Home: NextPage = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const typedEl = useRef<HTMLSpanElement>(null);
+
+  // Inicializar Typed.js
+  useEffect(() => {
+    const typed = new Typed(typedEl.current, {
+      strings: ['hábitos', 'resultados'],
+      typeSpeed: 100,
+      backSpeed: 50,
+      loop: true,
+    });
+
+    return () => {
+      typed.destroy();
+    };
+  }, []);
 
   // Detectar scroll para mudar o estilo do header
   useEffect(() => {
@@ -66,7 +82,7 @@ const Home: NextPage = () => {
         <section className={styles.heroSection}>
           <div className={styles.heroContent}>
             <h1 className={styles.heroTitle}>
-              Transforme seus <span className={styles.highlight}>hábitos</span> em <span className={styles.highlight}>resultados</span>
+              Transforme seus <span className={styles.highlight}><span ref={typedEl}></span></span> em <span className={styles.highlight}>resultados</span>
             </h1>
             <p className={styles.heroDescription}>
               Kaizen combina gamificação e inteligência artificial para ajudar você a construir hábitos consistentes, 
