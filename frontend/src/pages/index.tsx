@@ -5,11 +5,17 @@ import { useState, useEffect, useRef } from 'react';
 import Typed from 'typed.js';
 import styles from '@/styles/Home.module.css';
 
+/**
+ * Componente principal da página inicial do Kaizen
+ * Apresenta a landing page com seções de recursos, como funciona e benefícios
+ */
 const Home: NextPage = () => {
+  // Estado para controlar se a página foi rolada (para estilização do header)
   const [isScrolled, setIsScrolled] = useState(false);
+  // Referência para o elemento que será animado com o texto digitado
   const typedEl = useRef<HTMLSpanElement>(null);
 
-  // Inicializar Typed.js
+  // Efeito para inicializar a animação de digitação no texto do hero
   useEffect(() => {
     const typed = new Typed(typedEl.current, {
       strings: ['seus hábitos', 'em resultados'],
@@ -18,38 +24,42 @@ const Home: NextPage = () => {
       loop: true,
     });
 
+    // Cleanup para destruir a instância do Typed quando o componente for desmontado
     return () => {
       typed.destroy();
     };
   }, []);
 
-  // Detectar scroll para mudar o estilo do header
+  // Efeito para detectar o scroll da página e atualizar o estado
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      // Atualiza o estado baseado na posição do scroll
+      setIsScrolled(window.scrollY > 50);
     };
 
+    // Adiciona o listener de scroll
     window.addEventListener('scroll', handleScroll);
+    
+    // Remove o listener quando o componente é desmontado
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
     <div className={styles.container}>
+      {/* Head da página com metadados importantes para SEO */}
       <Head>
         <title>Kaizen - Transforme seus hábitos, eleve sua produtividade</title>
         <meta name="description" content="Kaizen é uma plataforma de gestão de hábitos e produtividade com gamificação e inteligência artificial para maximizar sua motivação e resultados." />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      {/* Header da página com navegação principal */}
       <header className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}>
         <div className={styles.headerContent}>
           <div className={styles.logo}>
             <span className={styles.logoText}>KAIZEN</span>
           </div>
+          {/* Navegação principal */}
           <nav className={styles.nav}>
             <Link href="#features">
               <span className={styles.navLink}>Recursos</span>
@@ -60,6 +70,7 @@ const Home: NextPage = () => {
             <Link href="#benefits">
               <span className={styles.navLink}>Benefícios</span>
             </Link>
+            {/* Botões de autenticação */}
             <div className={styles.authButtons}>
               <Link href="/login">
                 <span className={styles.loginButton}>Entrar</span>
@@ -69,6 +80,7 @@ const Home: NextPage = () => {
               </Link>
             </div>
           </nav>
+          {/* Botão do menu mobile */}
           <div className={styles.mobileMenuButton}>
             <span></span>
             <span></span>
@@ -78,7 +90,7 @@ const Home: NextPage = () => {
       </header>
 
       <main className={styles.main}>
-        {/* Hero Section */}
+        {/* Seção Hero - Primeira dobra da página */}
         <section className={styles.heroSection}>
           <div className={styles.heroContent}>
             <h1 className={styles.heroTitle}>
@@ -99,7 +111,7 @@ const Home: NextPage = () => {
           </div>
         </section>
 
-        {/* Features Section */}
+        {/* Seção de Recursos - Apresenta os principais recursos da plataforma */}
         <section className={styles.featuresSection} id="features">
           <div className={styles.sectionHeader}>
             <h2 className={styles.sectionTitle}>Recursos Poderosos</h2>
@@ -107,7 +119,9 @@ const Home: NextPage = () => {
               Ferramentas intuitivas que transformam o gerenciamento de tarefas e hábitos em uma experiência motivadora
             </p>
           </div>
+          {/* Grid de cards de recursos */}
           <div className={styles.featuresGrid}>
+            {/* Cards de recursos individuais */}
             <div className={styles.featureCard}>
               <div className={styles.featureIcon}>
                 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -156,7 +170,7 @@ const Home: NextPage = () => {
           </div>
         </section>
 
-        {/* How It Works Section */}
+        {/* Seção Como Funciona - Explica o fluxo de uso da plataforma */}
         <section className={styles.howItWorksSection} id="how-it-works">
           <div className={styles.sectionHeader}>
             <h2 className={styles.sectionTitle}>Como Funciona</h2>
@@ -164,7 +178,9 @@ const Home: NextPage = () => {
               Um processo simples para transformar sua produtividade e criar hábitos duradouros
             </p>
           </div>
+          {/* Container com os passos do processo */}
           <div className={styles.stepsContainer}>
+            {/* Passos individuais */}
             <div className={styles.step}>
               <div className={styles.stepNumber}>1</div>
               <h3 className={styles.stepTitle}>Defina seus objetivos</h3>
@@ -196,7 +212,7 @@ const Home: NextPage = () => {
           </div>
         </section>
 
-        {/* Benefits Section */}
+        {/* Seção de Benefícios - Destaque dos principais benefícios */}
         <section className={styles.benefitsSection} id="benefits">
           <div className={styles.sectionHeader}>
             <h2 className={styles.sectionTitle}>Por que escolher o Kaizen?</h2>
@@ -204,7 +220,9 @@ const Home: NextPage = () => {
               Benefícios que fazem a diferença na sua jornada de desenvolvimento pessoal
             </p>
           </div>
+          {/* Container com os benefícios */}
           <div className={styles.benefitsContainer}>
+            {/* Benefícios individuais */}
             <div className={styles.benefitCard}>
               <h3 className={styles.benefitTitle}>Motivação Constante</h3>
               <p className={styles.benefitDescription}>
@@ -226,7 +244,7 @@ const Home: NextPage = () => {
           </div>
         </section>
 
-        {/* CTA Section */}
+        {/* Seção de Call-to-Action */}
         <section className={styles.ctaSection}>
           <div className={styles.ctaContent}>
             <h2 className={styles.ctaTitle}>Comece sua transformação hoje</h2>
@@ -245,12 +263,14 @@ const Home: NextPage = () => {
         </section>
       </main>
 
+      {/* Rodapé da página */}
       <footer className={styles.footer}>
         <div className={styles.footerContent}>
           <div className={styles.footerLogo}>
             <span className={styles.logoText}>KAIZEN</span>
             <p className={styles.footerTagline}>Transformando hábitos em resultados</p>
           </div>
+          {/* Links de navegação no rodapé */}
           <div className={styles.footerLinks}>
             <div className={styles.footerLinkColumn}>
               <h3 className={styles.footerLinkTitle}>Plataforma</h3>
@@ -272,6 +292,7 @@ const Home: NextPage = () => {
             </div>
           </div>
         </div>
+        {/* Informações de direitos autorais */}
         <div className={styles.footerBottom}>
           <p className={styles.copyright}> 2025 Kaizen. Todos os direitos reservados.</p>
         </div>

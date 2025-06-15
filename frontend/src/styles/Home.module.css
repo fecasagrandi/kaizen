@@ -144,7 +144,8 @@
 
 .heroContent {
   flex: 1;
-  max-width: 600px;
+  max-width: 800px;
+  overflow: hidden;
 }
 
 .heroTitle {
@@ -153,11 +154,15 @@
   line-height: 1.2;
   margin-bottom: 1.5rem;
   color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .highlight {
   color: #3291ff;
   position: relative;
+  display: inline-block;
+  min-width: 300px;
 }
 
 .highlight::after {
