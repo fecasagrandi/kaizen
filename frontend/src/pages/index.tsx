@@ -19,8 +19,8 @@ const Home: NextPage = () => {
   useEffect(() => {
     const typed = new Typed(typedEl.current, {
       strings: ['seus hábitos', 'em resultados'],
-      typeSpeed: 100,
-      backSpeed: 100,
+      typeSpeed: 90,
+      backSpeed: 70,
       loop: true,
     });
 
@@ -251,9 +251,6 @@ const Home: NextPage = () => {
             <div className={styles.ctaButtons}>
               <Link href="/register">
                 <span className={styles.primaryButton}>Criar Conta Gratuita</span>
-              </Link>
-              <Link href="/dashboard">
-                <span className={styles.secondaryButton}>Explorar Demo</span>
               </Link>
             </div>
           </div>
