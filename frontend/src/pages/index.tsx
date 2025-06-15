@@ -12,9 +12,9 @@ const Home: NextPage = () => {
   // Inicializar Typed.js
   useEffect(() => {
     const typed = new Typed(typedEl.current, {
-      strings: ['hábitos', 'resultados'],
+      strings: ['seus hábitos', 'em resultados'],
       typeSpeed: 100,
-      backSpeed: 50,
+      backSpeed: 100,
       loop: true,
     });
 
@@ -82,7 +82,7 @@ const Home: NextPage = () => {
         <section className={styles.heroSection}>
           <div className={styles.heroContent}>
             <h1 className={styles.heroTitle}>
-              Transforme seus <span className={styles.highlight}><span ref={typedEl}></span></span> em <span className={styles.highlight}>resultados</span>
+              Transforme <span className={styles.highlight}><span ref={typedEl}></span></span>  
             </h1>
             <p className={styles.heroDescription}>
               Kaizen combina gamificação e inteligência artificial para ajudar você a construir hábitos consistentes, 
