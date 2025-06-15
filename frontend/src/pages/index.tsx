@@ -104,9 +104,6 @@ const Home: NextPage = () => {
               <Link href="/register">
                 <span className={styles.primaryButton}>Começar Jornada</span>
               </Link>
-              <Link href="/dashboard">
-                <span className={styles.secondaryButton}>Ver Demo</span>
-              </Link>
             </div>
           </div>
         </section>

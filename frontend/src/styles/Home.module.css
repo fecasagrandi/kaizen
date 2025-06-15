@@ -190,7 +190,7 @@
   gap: 1.5rem;
 }
 
-.primaryButton, .secondaryButton {
+.primaryButton {
   padding: 1rem 2rem;
   border-radius: 8px;
   font-weight: 600;
@@ -199,9 +199,6 @@
   transition: all 0.3s ease;
   display: inline-block;
   white-space: nowrap;
-}
-
-.primaryButton {
   background-color: #3291ff;
   color: white;
   border: 2px solid #3291ff;
@@ -211,18 +208,7 @@
   background-color: #2563eb;
   border-color: #2563eb;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(50, 145, 255, 0.3);
-}
-
-.secondaryButton {
-  background-color: transparent;
-  color: #3291ff;
-  border: 2px solid #3291ff;
-}
-
-.secondaryButton:hover {
-  background-color: rgba(50, 145, 255, 0.1);
-  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(50, 145, 255, 0.2);
 }
 
 .heroImageContainer {
@@ -828,7 +814,7 @@
     margin-right: auto;
   }
   
-  .primaryButton, .secondaryButton {
+  .primaryButton {
     width: 100%;
     text-align: center;
   }
