@@ -22,7 +22,7 @@ router.use('/tasks', taskRoutes);
 // Challenge routes
 router.use('/challenges', challengeRoutes);
 
-// API health check
+// API funciona corretamente
 router.get('/health', (req, res) => {
   res.status(200).json({ status: 'UP', message: 'API funcionando corretamente' });
 });
