@@ -1,46 +1,78 @@
 const jwt = require('jsonwebtoken');
-const User = require('../models/user.model');
+const { Usuario } = require('../models');
 
-const authMiddleware = async (req, res, next) => {
+// Middleware para verificar o token JWT
+exports.autenticar = async (req, res, next) => {
   try {
-    // Verificar se o token está presente no cabeçalho
+    // Obter o token do cabeçalho Authorization
     const authHeader = req.headers.authorization;
+    
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
-      return res.status(401).json({ message: 'Token de autenticação não fornecido' });
+      return res.status(401).json({
+        sucesso: false,
+        mensagem: 'Token de autenticação não fornecido ou em formato inválido. Use o formato: Bearer <token>'
+      });
     }
 
-    // Extrair o token
     const token = authHeader.split(' ')[1];
+    
+    if (!token) {
+      return res.status(401).json({
+        sucesso: false,
+        mensagem: 'Token de autenticação não fornecido'
+      });
+    }
 
     // Verificar e decodificar o token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-    // Verificar se o usuário existe
-    const user = await User.findByPk(decoded.id);
-    if (!user) {
-      return res.status(404).json({ message: 'Usuário não encontrado' });
+    
+    // Buscar o usuário no banco de dados
+    const usuario = await Usuario.findByPk(decoded.id);
+    
+    if (!usuario) {
+      return res.status(401).json({
+        sucesso: false,
+        mensagem: 'Usuário não encontrado para este token'
+      });
     }
 
-    // Adicionar o usuário ao objeto de requisição
-    req.user = {
-      id: user.id,
-      email: user.email,
-      username: user.username,
-      level: user.level,
-      xp: user.xp
-    };
-
+    // Adicionar o usuário ao objeto de requisição para uso posterior
+    req.usuario = usuario;
     next();
+    
   } catch (error) {
-    if (error.name === 'JsonWebTokenError') {
-      return res.status(401).json({ message: 'Token inválido' });
-    }
-    if (error.name === 'TokenExpiredError') {
-      return res.status(401).json({ message: 'Token expirado' });
-    }
     console.error('Erro na autenticação:', error);
-    res.status(500).json({ message: 'Erro na autenticação', error: error.message });
+    
+    if (error.name === 'JsonWebTokenError') {
+      return res.status(401).json({
+        sucesso: false,
+        mensagem: 'Token inválido'
+      });
+    }
+    
+    if (error.name === 'TokenExpiredError') {
+      return res.status(401).json({
+        sucesso: false,
+        mensagem: 'Token expirado. Faça login novamente.'
+      });
+    }
+    
+    res.status(500).json({
+      sucesso: false,
+      mensagem: 'Erro na autenticação',
+      erro: process.env.NODE_ENV === 'development' ? error.message : undefined
+    });
   }
 };
 
-module.exports = authMiddleware;
+// Middleware para verificar permissões de administrador
+exports.ehAdmin = (req, res, next) => {
+  // Verifica se o usuário está autenticado e é administrador
+  if (!req.usuario || req.usuario.nivel < 10) { // Ajuste o nível conforme necessário
+    return res.status(403).json({
+      sucesso: false,
+      mensagem: 'Acesso negado. Permissão de administrador necessária.'
+    });
+  }
+  next();
+};
